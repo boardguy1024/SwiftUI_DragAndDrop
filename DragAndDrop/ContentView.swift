@@ -54,7 +54,7 @@ struct ContentView: View {
             ForEach(viewModel.items, id: \.id) { item in
                 ItemView(item: item)
                 .onDrag({ viewModel.onDrag(item) })
-                .onDrop(of: [.url], delegate: DropTodoableDelegate(
+                .onDrop(of: [.url], delegate: ItemDropDelegate(
                     item: item,
                     items: $viewModel.items,
                     dragItem: $viewModel.dragItem
@@ -90,7 +90,7 @@ struct ItemView: View {
     }
 }
 
-struct DropTodoableDelegate: DropDelegate {
+struct ItemDropDelegate: DropDelegate {
     let item: Item
     @Binding var items: [Item]
     @Binding var dragItem: Item?
